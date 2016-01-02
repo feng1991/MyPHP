@@ -4,4 +4,4 @@
 
 # dowmload_picture
 - This is a tool to download pictures in the given urls.
-- TO do: 1. use multi-threads. 2. download pictures loaded by js. 3. climb related url. 4. create zip
+- TO do: 2. download pictures loaded by js. 3. climb related url. 4. create zip
