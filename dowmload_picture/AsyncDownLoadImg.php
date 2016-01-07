@@ -1,5 +1,6 @@
 <?php
 
+	require_once "Tool.php";
 	require_once "DownLoadImg.php";
 
 	/**

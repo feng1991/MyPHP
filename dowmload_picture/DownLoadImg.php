@@ -1,5 +1,6 @@
 <?php
 
+	require_once "Tool.php";
 
 	/**
 	 * download imgage in urls
@@ -10,7 +11,6 @@
 		protected $done_urls;
 		protected $undone_urls;
 		protected $done_imgs;
-		protected $undone_imgs;
 
 
 		/**
@@ -99,7 +99,7 @@
 				mkdir($save_path,0777,true);
 			}
 			foreach($imgs as $i => $img){
-				!$img && continues;
+				if(!$img)  continue;
 				//相对地址转换为绝对地址
 				if($img[0] == '/' || $imgs[0] == '.'){
 					$img = $url.ltrim($img,'./');
@@ -108,11 +108,10 @@
 					continue;
 				}
 				$img_content = @file_get_contents($img);
-				!$img_content && continues;
+				if(!$img_content)  continue;
 				$new_fileName = $save_path.md5(uniqid('', true)).'.'.$type[$i];
 				file_put_contents($new_fileName, $img_content);
 				array_push($this->done_imgs,$img);
-				Tool::dump($this,true);
 			}
 		}
 
@@ -122,24 +121,10 @@
 
 
 
-	/**
-	 * function tool
-	 */
-	class Tool{
 
-		static function dump($str,$exit=false){
-			header('content-type:text/html;charset=utf-8');
-			echo '<pre>';
-			var_dump($str);
-			echo '</pre>';
-			if($exit){
-				exit;
-			}
-		}
 
-	}
 
-	
+
 
 
 
@@ -153,10 +138,3 @@
 	);
 	$down = new DownLoadImg($urls);
 	$down->start();
-
-
-	
-	
-
-	
-	
