@@ -104,10 +104,15 @@
 				if($img[0] == '/' || $imgs[0] == '.'){
 					$img = $url.ltrim($img,'./');
 				}
+				if(in_array($img,$this->done_imgs)){
+					continue;
+				}
 				$img_content = @file_get_contents($img);
 				!$img_content && continues;
 				$new_fileName = $save_path.md5(uniqid('', true)).'.'.$type[$i];
 				file_put_contents($new_fileName, $img_content);
+				array_push($this->done_imgs,$img);
+				Tool::dump($this,true);
 			}
 		}
 
