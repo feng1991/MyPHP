@@ -4,4 +4,6 @@
 
 # dowmload_picture
 - This is a tool to download pictures in the given urls.
-- TO do: 1.speed up. 2. download pictures loaded by js. 3. use json/xml file as setting
+- You can specify the method of download: file_get_content or curl.
+- While downloading,you can check the log file to see what is going on.
+- TO do: 1.speed up. 2. download pictures loaded by js. 3. use json/xml file as setting. 4. add log to konw what's going on. 

@@ -55,36 +55,3 @@
 			}  
 		}  
 	}
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	/**
-	 * mutil-threads test
-	 */
-	// $urls = array(
-	// 	array("http://www.mm131.com/"),
-	// 	array("http://www.mmkaixin.com/"),
-	// );
-	// $down = new AsyncDownLoadImg($urls);
-	// $down->async_start();
-	
-
-
-
-	
-	
-
-	
-	
