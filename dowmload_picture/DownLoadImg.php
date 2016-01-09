@@ -17,17 +17,12 @@
 		/**
 		 * Need urls to download
 		 */
-		public function __construct($urls = false,$curl = false){
+		public function __construct($urls = false,$method = false,$log_file=false){
 			header('content-type:text/html;charset=utf-8');
 			date_default_timezone_set('PRC');
-			if($urls){
-				$this->urls = $urls;
-			}
-			if($curl){
-				$this->method = 1;
-			}else{
-				$this->method = 0;
-			}
+			$this->urls = $urls ? $urls : NULL;
+			$this->method = $method ? 1 : 0;
+			$this->log_file = $log_file ? $log_file : NULL;
 			$this->done_urls = array();
 			$this->undone_urls = array();
 			$this->done_imgs = array();
@@ -57,14 +52,17 @@
 
 
 		/**
-		 * get the content in the given url
+		 * write information into a log file
 		 */
 		protected function make_log($str){
-			if(!$this->log_file){
-				$time = date('Y-m-d-H-i-s');
-				$this->log_file = sprintf('./%s_log.txt',$time);
+			// if(!$this->log_file){
+			// 	$time = date('Y-m-d-H-i-s');
+			// 	$uniqid = md5(uniqid('', true));
+			// 	$this->log_file = sprintf('./%s_%s_log.txt',$uniqid,$time);
+			// }
+			if($this->log_file){
+				Tool::log($str,$this->log_file);
 			}
-			Tool::log($str,$this->log_file);
 		}
 
 
