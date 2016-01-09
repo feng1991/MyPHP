@@ -4,4 +4,4 @@
 
 # dowmload_picture
 - This is a tool to download pictures in the given urls.
-- TO do: 2. download pictures loaded by js. 4. create zip
+- TO do: 1.speed up. 2. download pictures loaded by js. 3. use json/xml file as setting

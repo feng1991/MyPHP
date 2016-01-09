@@ -38,7 +38,7 @@
 				while(!empty($this->undone_urls)){
 					$do_url = array_pop($this->undone_urls);
 					$text = $this->get_contents($do_url);
-					$this->get_link_url($text);
+					$this->get_link_url($do_url,$text);
 					$match = $this->get_img_urls($text);
 					$this->save_imgs($url,$match);
 					array_push($this->done_urls,$do_url);
@@ -52,20 +52,25 @@
 		 * get the html content in the given url
 		 */
 		protected function get_contents($url){
-			return @file_get_contents($url);
+			$text = @file_get_contents($url);
+			//Tool::dump($text,true);
+			return $text;
 		}
 
 
 		/**
 		 * get the url of the link using RegExp
 		 */
-		protected function get_link_url($text){
-			$pattern = '/<a.+href=\"?([^\"]+)\"?(>|\s+\w*>)/i';
+		protected function get_link_url($url,$text){
+			$pattern = '/<a[^<]+href=\"?([^\"<]+)\"?[^<]*>/i';
 			preg_match_all($pattern,$text,$match);
 			if($match){
 				$links = $match[1];
 				//Tool::dump($match,true);
 				foreach($links as $link){
+					if($link[0] == '/' || $link[0] == '.'){
+						$link = $url.ltrim($link,'./');
+					}
 					if(!in_array($link,$this->undone_urls) && !in_array($link,$this->done_urls)){
 						array_push($this->undone_urls,$link);
 					}
@@ -79,8 +84,9 @@
 		 * get the url of the imgae using RegExp
 		 */
 		protected function get_img_urls($text){
-			$pattern = '/<img.+src=\"?(.+\.(jpeg|jpg|gif|bmp|bnp|png|gif))\"?.+>/i';
+			$pattern = '/<img[^<]+src=\"?([^<]+\.(jpeg|jpg|gif|bmp|bnp|png|gif))\"?[^<]*>/i';
 			preg_match_all($pattern,$text,$match);
+			//Tool::dump($match,true);
 			return $match;
 		}
 
@@ -89,6 +95,9 @@
 		 * save the imgae by the url
 		 */
 		protected function save_imgs($url,$match){
+			if(!$match){
+				return false;
+			}
 			$imgs = $match[1];
 			$type = $match[2];
 			//Tool::dump($imgs,true);
@@ -100,7 +109,6 @@
 			}
 			foreach($imgs as $i => $img){
 				if(!$img)  continue;
-				//相对地址转换为绝对地址
 				if($img[0] == '/' || $imgs[0] == '.'){
 					$img = $url.ltrim($img,'./');
 				}
@@ -114,17 +122,8 @@
 				array_push($this->done_imgs,$img);
 			}
 		}
-
 	}
-
-
-
-
-
-
-
-
-
+	
 
 
 
@@ -132,9 +131,20 @@
 	 * test
 	 */
 	$urls = array(
-		"http://www.mm131.com/",
-		//"http://www.mmkaixin.com/",
-		//'http://tu.duowan.com',
+		'http://www.22mm.cc/',
+		//'http://www.yneol.com.cn/hot',
+		//'http://www.renti114.com/',
+		
+
+		//'http://tu.duowan.com/',
+		//'http://www.uumnt.com/'
+		// "http://www.mm131.com/",
+		// "http://www.mmkaixin.com/",
+		// 'http://www.17786.com/',
 	);
+
+	
+	
+	
 	$down = new DownLoadImg($urls);
 	$down->start();
