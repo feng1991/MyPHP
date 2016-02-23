@@ -1,3 +1,5 @@
 <?php
-	require_once('./cor/lib/Application.class.php');
-	Application::start();
+	require_once('./core/lib/Application.class.php');
+	//Application::start();
+	$app = new Application;
+	$app->start();
