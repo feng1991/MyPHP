@@ -2,17 +2,21 @@
 	class Application{
 
 		public function start(){
-			//register include path
-			$this->register_path();
-			$this->register_autoload_function();
-			//read config
-			$this->read_config();
-			//define const
-
-			//dispatch
-			$route = new Route();
-			$route->parse();
-			//run method in controller
+			try{
+				//register include path
+				$this->register_path();
+				$this->register_autoload_function();
+				//read config
+				$this->read_config();
+				//define const
+				//dispatch
+				$route = new Route();
+				$route->parse();
+				//run method in controller
+				
+			}catch(Exception $e){
+				Tool::e($e);
+			}
 		}
 
 

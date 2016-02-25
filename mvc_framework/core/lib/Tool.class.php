@@ -28,4 +28,17 @@
 				return $config[$name];
 			}
 		}
+
+
+		/**
+		 * print the exception message
+		 */
+		static public function e($e){
+			//self::d($e);exit;
+			$html = file_get_contents('./core/view/exception.html');
+			$html = str_replace('{$message}',$e->getmessage(),$html);
+			$trace = implode('<br/>#',explode('#',$e->getTraceAsString()));
+			$html = str_replace('{$trace}',$trace,$html);
+			echo $html;
+		}
 	}
