@@ -11,11 +11,12 @@
 				//read config
 				$this->read_config();
 				//dispatch
-				$route = new Route();
-				$route->parse();
+				Route::parse();
 				//run method in controller
-				$controller = Tool::a();
+				$controller = Tool::r();
 				//Tool::d($controller);
+				$method = APP_METHOD;
+				$controller->$method();
 			}catch(Exception $e){
 				Tool::e($e);
 			}
@@ -24,7 +25,13 @@
 
 		private function register_autoload_function(){
 			spl_autoload_register(function ($class) {
-			    require_once $class . '.class.php';
+				$fileName = $class . '.class.php';
+				@include_once $fileName;
+				unset($fileName,$class);
+			});
+			spl_autoload_register(function ($class) {
+			    Tool::e(new Exception("Could not find {$class} class"));
+			    exit;
 			});
 		}
 
@@ -39,6 +46,8 @@
 
 
 		private function define_const(){
+			//name
+			define('APPLICATION_CONTROLLER_DIR_NAME','controller');
 			//file
 			define('CORE_CONFIG','./core/conf/config.php');
 			define('APPLICATION_CONFIG','./application/conf/config.php');
@@ -46,7 +55,6 @@
 			//dir
 			define('CORE_LIB_DIR','./core/lib/');
 			define('APPLICATION_GROUP_DIR','./application/group/');
-			define('APPLICATION_CONTROLLER_DIR_NAME','controller');
 		}
 
 	}

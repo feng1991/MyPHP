@@ -1,4 +1,4 @@
 <?php
 	return array(
-		'test' => 'feng',
+		'debug' => true,
 	);

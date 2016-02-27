@@ -4,11 +4,9 @@
 		/**
 		 * parse the url and define group,controller,method
 		 */
-		public function parse(){
-			//Tool::d($_SERVER);
+		static public function parse(){
 			$pathinfo = strtolower(trim($_SERVER['PATH_INFO'],'/'));
-			$pathinfo = explode('/',$pathinfo);
-			//Tool::d($pathinfo);
+			$pathinfo && $pathinfo = explode('/',$pathinfo);
 			$len = count($pathinfo);
 			if($len < 3){
 				throw new Exception("Need group or controller or method!");
@@ -20,6 +18,5 @@
 				$_GET[$pathinfo[$i]] = $pathinfo[$i+1];
 			}
 			$_REQUEST = array_merge($_GET,$_POST);
-			//Tool::d($_GET);
 		}
 	}
