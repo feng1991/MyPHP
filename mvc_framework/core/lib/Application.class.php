@@ -51,10 +51,12 @@
 			//file
 			define('CORE_CONFIG','./core/conf/config.php');
 			define('APPLICATION_CONFIG','./application/conf/config.php');
+			define('APPLICATION_DEFAULT_LOG','log.txt');
 			define('CORE_EXCEPTION_TPL','./core/view/exception.html');
 			//dir
 			define('CORE_LIB_DIR','./core/lib/');
 			define('APPLICATION_GROUP_DIR','./application/group/');
+			define('APPLICATION_LOG','./application/data/log/');
 		}
 
 	}

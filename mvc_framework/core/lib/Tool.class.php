@@ -11,6 +11,7 @@
 			if($exit){
 				exit;
 			}
+			unset($var,$exit);
 		}
 
 		/**
@@ -40,6 +41,7 @@
 				$trace = implode('<br/>#',explode('#',$e->getTraceAsString()));
 				$html = str_replace('{$trace}',$trace,$html);
 			}
+			unset($e,$trace);
 			echo $html;
 		}
 
@@ -57,7 +59,26 @@
 			}
 			$controller = self::upper_first($controller).self::upper_first(APPLICATION_CONTROLLER_DIR_NAME); 
 			$controller = new $controller();
+			unset($group);
 			return $controller;
+		}
+
+
+		/**
+		 * write log
+		 */
+		static public function l($text,$file=false){
+			if(!is_dir(APPLICATION_LOG)){
+				mkdir(APPLICATION_LOG,0777,true);
+			}
+			if(!$file){
+				$file = APPLICATION_DEFAULT_LOG;
+			}
+			$file = APPLICATION_LOG.$file;
+			$time = date('Y-m-d H:i:s');
+			$content = sprintf("Time: %s \nContent: %s \n\n",$time,$text);
+			file_put_contents($file, $content,FILE_APPEND);
+			unset($text,$file,$time,$content);
 		}
 
 
@@ -66,6 +87,7 @@
 		 */
 		static public function register_path($path){
 			set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+			unset($path);
 		}
 
 
