@@ -65,6 +65,15 @@
 
 
 		/**
+		 * new a model 
+		 */
+		static public function m($tableName){
+			$model = new Model($tableName);
+			return $model;
+		}
+
+
+		/**
 		 * write log
 		 */
 		static public function l($text,$file=false){

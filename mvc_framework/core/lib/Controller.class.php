@@ -2,6 +2,38 @@
 	class Controller{
 
 		/**
+		 *  whether the request method is get
+		 */
+		public function is_get(){
+			return $_GET ? true : false;
+		}
+
+
+		/**
+		 *  whether the request method is post
+		 */
+		public function is_post(){
+			return $_POST ? true : false;
+		}
+
+
+		/**
+		 *  whether the request method is get or post
+		 */
+		public function is_request(){
+			return $_REQUEST ? true : false;
+		}
+
+
+		/**
+		 *  whether the request method is get or post
+		 */
+		public function is_ajax(){
+			return $_SERVER['HTTP_X_REQUESTED_WITH'] ? true : false;
+		}
+
+
+		/**
 		 *  get the input by get method
 		 */
 		public function get($name,$fun=false,$default=null){
