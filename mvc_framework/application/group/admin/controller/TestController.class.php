@@ -14,6 +14,9 @@
 			Tool::d($this->is_request());
 			Tool::d($this->is_ajax());
 
-			Tool::m('test');
+			$model = Tool::m('pin_admin');
+			$model->limit(1,2);
+			Tool::d($model->find());
+			Tool::d($model->select());
 		}
 	}

@@ -68,8 +68,11 @@
 		 * new a model 
 		 */
 		static public function m($tableName){
-			$model = new Model($tableName);
-			return $model;
+			static $models = array();
+			if(!$models[$tableName]){
+				$models[$tableName] = new Model($tableName);
+			}
+			return $models[$tableName];
 		}
 
 
