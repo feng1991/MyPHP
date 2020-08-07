@@ -1,9 +1,5 @@
 ## My work:
 
-### Memcache_admin
-- This is a project based on https://github.com/junstor/memadmin.git.
-- I add a menu with which we can get all the key-values from memcached without choosing one slab.In the meantime,we can specify the key or the value we want to find.
-
 ### dowmload_picture
 - This is a tool to download pictures in the given urls.
 - You can specify the method of download: file_get_content or curl.
